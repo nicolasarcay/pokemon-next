@@ -44,7 +44,10 @@ const PokemonByNamePage: NextPage<Props> = ({ pokemon }) => {
   };
 
   return (
-    <Layout title={`Pokemon ${pokemon.name}`}>
+    <Layout
+      title={`Pokemon ${pokemon.name}`}
+      metadescription={`Esta es la pagina de ${pokemon.name}`}
+    >
       <Grid.Container gap={2} css={{ marginTop: '25px' }}>
         <Grid xs={12} md={4}>
           <Card css={{ alignItems: 'center' }}>
