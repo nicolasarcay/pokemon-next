@@ -22,7 +22,7 @@ export const Layout: FC<PropsLayout> = ({
         />
         <meta name="keywords" content={keywords || 'pokemon, pokedex'} />
         <meta property="og:title" content={`${title} - pokeApi`} />
-        <meta property="og:description" content={`${metadescription}`} />
+        <meta property="og:description" content={metadescription} />
         <meta property="og:image" content={`${origin}/img/banner.png`} />
       </Head>
       <NavbarMenu />
