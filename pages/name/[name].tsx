@@ -137,7 +137,8 @@ export const getStaticPaths: GetStaticPaths = async ctx => {
     paths: pokemonNames.map(name => ({
       params: { name },
     })),
-    fallback: false,
+    // fallback: false, Aca da 404 cuando la pagina no esta generado en el build
+    fallback: 'blocking',
   };
 };
 
@@ -146,10 +147,23 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   // de esta manera le digo que los params traen un id que es de tipo string
   const { name } = params as { name: string };
 
+  const pokemon = await getPokemonInfo(name);
+
+  if (!pokemon) {
+    return {
+      redirect: {
+        destination: '/',
+        permanent: false,
+      },
+    };
+  }
+
   return {
     props: {
-      pokemon: await getPokemonInfo(name),
+      pokemon,
     },
+    // esto hace que se regenere la pagina estatica cada una cantidad X de segundos
+    revalidate: 86400, //son 24hs 60*60*24
   };
 };
 
